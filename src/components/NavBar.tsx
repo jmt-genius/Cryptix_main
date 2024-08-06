@@ -54,7 +54,7 @@ const NavBar = () => {
             </div>
             )}
             {modalVisible &&
-                <form className='absolute p-4 rounded-xl flex flex-col gap-4 top-[30%] left-[40%] border shadow'>
+                <form className='absolute bg-white p-4 rounded-xl flex flex-col gap-4 top-[30%] left-[40%] border shadow'>
                     <div className='flex justify-end p-4 cursor-pointer' onClick={()=>setModalVisible(false)}>X</div>
                     <Heading text="Create a new Token!" />
                     <div className='flex flex-col gap-4'>

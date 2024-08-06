@@ -54,10 +54,8 @@ const HomePage = () => {
 
   return (
     <div>
-      <h1>HomePage</h1>
-      <Button text="Add Token" onClick={()=>setModalVisible(!modalVisible)} />
-      
-      {/* {responseVal.length > 0 ? (
+      <h1>HomePage</h1>      
+      {responseVal.length > 0 ? (
         <ul className='flex gap-8 w-[60vw] flex-wrap'>
           {responseVal.map((item, index) => (
             <li>
@@ -67,14 +65,14 @@ const HomePage = () => {
         </ul>
       ) : (
         <p>Loading...</p>
-      )} */}
+      )}
     </div>
   );
 };
 
 function CoinCard({src,tokenName,tokenSymbol,price,projectName}:{src:string,tokenName:string,tokenSymbol:string,price:string,projectName:string}){
   return(
-    <div className='shadow-xl rounded-xl border-gray-300 border-2 flex gap-2 flex-col p-4'>
+    <div className='shadow-xl bg-white rounded-xl border-gray-300 border-2 flex gap-2 flex-col p-4'>
       <Image src={src} alt={tokenName} height={100} width={100} />
       <div className='flex flex-col gap-2 px-1 py-2'>
         <SubHeading text={`${tokenName} ${tokenSymbol}`} />
