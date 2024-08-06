@@ -13,5 +13,6 @@ import { H4 } from "./H4";
 import { Para } from "./Para";
 import { BlockQuote } from "./BlockQuote";
 import { LightText } from "./LightText";
+import BlackButton from "./BlackButton";
 
-export {NavBar, Input, ButtonShimmer, Heading, SubHeading, Text, Button, CircularButton, H1, H2, H3, H4, Para, BlockQuote, LightText}
+export {NavBar, Input, ButtonShimmer, Heading, SubHeading, Text, Button, CircularButton, H1, H2, H3, H4, Para, BlockQuote, LightText, BlackButton}
