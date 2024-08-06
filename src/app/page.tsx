@@ -10,22 +10,22 @@ import styles from './HomePage.module.css'; // Adjust the path as necessary
 const HomePage: React.FC = () => {
   const [walletAddress, setWalletAddress] = useState<string | null>(null);
 
-  const connectWallet = async () => {
-    if ((window as any).ethereum) {
-      try {
-        const provider = new ethers.BrowserProvider((window as any).ethereum);
-        await provider.send("eth_requestAccounts", []);
-        const signer = await provider.getSigner();
-        const address = await signer.getAddress();
-        console.log(`Connected wallet address: ${address}`);
-        setWalletAddress(address);
-      } catch (error) {
-        console.error("User denied account access or error occurred", error);
-      }
-    } else {
-      alert("MetaMask is not installed. Please install it to use this app.");
-    }
-  };
+  // const connectWallet = async () => {
+  //   if ((window as any).ethereum) {
+  //     try {
+  //       const provider = new ethers.BrowserProvider((window as any).ethereum);
+  //       await provider.send("eth_requestAccounts", []);
+  //       const signer = await provider.getSigner();
+  //       const address = await signer.getAddress();
+  //       console.log(`Connected wallet address: ${address}`);
+  //       setWalletAddress(address);
+  //     } catch (error) {
+  //       console.error("User denied account access or error occurred", error);
+  //     }
+  //   } else {
+  //     alert("MetaMask is not installed. Please install it to use this app.");
+  //   }
+  // };
 
   return (
     <div className={styles.container}>
@@ -38,7 +38,7 @@ const HomePage: React.FC = () => {
           with Advanced Blockchain Technology
         </h2>
       </div>
-      <div className={styles.buttonContainer}>
+      {/* <div className={styles.buttonContainer}>
         {walletAddress ? (
           <p>Connected: {walletAddress}</p>
         ) : (
@@ -46,7 +46,8 @@ const HomePage: React.FC = () => {
             Connect Wallet
           </button>
         )}
-      </div>
+      </div> */}
+      <div>Lol</div>
     </div>
   );
 };

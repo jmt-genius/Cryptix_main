@@ -14,10 +14,10 @@ const HomePage = () => {
   type ChainToken = 'ARB' | 'BTC' | 'BNB' | 'SOL' | 'MATIC';
   const [currentChainToken, setCurrentChainToken] = useState<ChainToken>('MATIC');
   const [multiplier, setMultiplier] = useState({
-    "ARB": 2,
-    "BTC": 3,
-    "BNB": 4,
-    "SOL": 5,
+    "ARB": 0.78,
+    "BTC": 0.0000071,
+    "BNB": 0.0008329,
+    "SOL": 0.0031,
     "MATIC": 1
   });
   const responseVal = [
