@@ -11,10 +11,10 @@ const HomePage = () => {
   type ChainToken = 'ARB' | 'BTC' | 'BNB' | 'SOL' | 'MATIC';
   const [currentChainToken, setCurrentChainToken] = useState<ChainToken>('MATIC');
     const [multiplier, setMultiplier] = useState({
-    "ARB": 2,
-    "BTC": 3,
-    "BNB": 4,
-    "SOL": 5,
+    "ARB": 0.78,
+    "BTC": 0.0000071,
+    "BNB": 0.0008329,
+    "SOL": 0.0031,
     "MATIC": 1
   });
   const responseVal =[
@@ -55,7 +55,7 @@ const HomePage = () => {
         ))}
       </div>
       {responseVal.length > 0 ? (
-        <ul className='flex gap-8 w-[60vw] flex-wrap'>
+        <ul className='flex gap-8 min-w-[60vw] flex-wrap'>
           {responseVal.map((item, index) => (
             <li key={index}>
               <CoinCard
@@ -78,7 +78,7 @@ const HomePage = () => {
 
 function CoinCard({ src, tokenName, tokenSymbol, price, projectName, currentChainToken }: { src: string, tokenName: string, tokenSymbol: string, price: number, projectName: string, currentChainToken: string }) {
   return (
-    <div className='shadow-xl rounded-xl border-gray-300 border-2 flex-wrap flex gap-2 flex-col p-4'>
+    <div className='shadow-xl rounded-xl border-gray-300 border-2 flex gap-2 flex-col p-4'>
       <Image src={src} alt={tokenName} height={100} width={100} />
       <div className='flex flex-col gap-2 px-1 py-2'>
         <SubHeading text={`${tokenName} ${tokenSymbol}`} />
