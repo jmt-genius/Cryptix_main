@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import React from 'react'
 
-const CircularButton = ({currentFilter,setCurrentFilter,setCurrentChainToken,imgURL,name,chainToken,bgColor,borderColor,textColor}:{currentFilter:string,setCurrentFilter:any,setCurrentChainToken:any,imgURL:string,name:string,chainToken:string,bgColor:string,borderColor:string,textColor:string}) => {
+const CircularButton = ({prevChainToken,setPrevChainToken,currentFilter,setCurrentFilter,currentChainToken,setCurrentChainToken,imgURL,name,chainToken,bgColor,borderColor,textColor}:{prevChainToken:string,setPrevChainToken:any,currentFilter:string,setCurrentFilter:any,currentChainToken:string,setCurrentChainToken:any,imgURL:string,name:string,chainToken:string,bgColor:string,borderColor:string,textColor:string}) => {
   return (
     <div onClick={()=>{
         setCurrentFilter(name)
