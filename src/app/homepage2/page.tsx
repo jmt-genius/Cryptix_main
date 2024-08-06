@@ -8,6 +8,7 @@ import { stringify } from 'querystring';
 
 const HomePage = () => {
   // const [responseVal, setResponseVal] = useState([]);
+  const [modalVisible,setModalVisible] = useState(false)
 
   const responseVal = [
     {
@@ -54,7 +55,9 @@ const HomePage = () => {
   return (
     <div>
       <h1>HomePage</h1>
-      {responseVal.length > 0 ? (
+      <Button text="Add Token" onClick={()=>setModalVisible(!modalVisible)} />
+      
+      {/* {responseVal.length > 0 ? (
         <ul className='flex gap-8 w-[60vw] flex-wrap'>
           {responseVal.map((item, index) => (
             <li>
@@ -64,7 +67,7 @@ const HomePage = () => {
         </ul>
       ) : (
         <p>Loading...</p>
-      )}
+      )} */}
     </div>
   );
 };
@@ -89,6 +92,5 @@ function CoinCard({src,tokenName,tokenSymbol,price,projectName}:{src:string,toke
     </div>
   )
 }
-
 
 export default HomePage;
