@@ -3,11 +3,13 @@
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 
-import { Button, ButtonShimmer, Heading, SubHeading, Text } from '@/components';
-import { stringify } from 'querystring';
+import { Button, ButtonShimmer, CircularButton, Heading, SubHeading, Text } from '@/components';
 
 const HomePage = () => {
   // const [responseVal, setResponseVal] = useState([]);
+
+  const [currentFilter,setCurrentFilter] =useState("Polygon")
+  const [currentToken,setCurrentToken] = useState("MATIC")
 
   const responseVal = [
     {
@@ -44,6 +46,49 @@ const HomePage = () => {
     }
   ]
 
+  const filter=[
+    {
+      imageURL:"/arbitrum.png",
+      name:"Arbitrum",
+      bgColor:"orange-500",
+      borderColor:"orange-600",
+      textColor:"white",
+      token:"ARB"
+    },
+    {
+      imageURL:"/btc.png",
+      name:"Bitcoin",
+      bgColor:"orange-500",
+      borderColor:"orange-600",
+      textColor:"white",
+      token:"BTC"
+    },
+    {
+      imageURL:"/binance.png",
+      name:"Binanace",
+      bgColor:"orange-500",
+      borderColor:"orange-600",
+      textColor:"white",
+      token:"BNB"
+    },
+    {
+      imageURL:"/solana.png",
+      name:"Solana",
+      bgColor:"orange-500",
+      borderColor:"orange-600",
+      textColor:"white",
+      token:"SOL"
+    },
+    {
+      imageURL:"/polygon.png",
+      name:"Polygon",
+      bgColor:"orange-500",
+      borderColor:"orange-600",
+      textColor:"white",
+      token:"MATIC"
+    },
+  ]
+
   // useEffect(() => {
   //   fetch('https://6667f9c6f53957909ff5fe12.mockapi.io/api/v1/QuizDatabase')
   //     .then((response) => response.json())
@@ -52,13 +97,19 @@ const HomePage = () => {
   // }, []);
 
   return (
-    <div>
-      <h1>HomePage</h1>
+    <div className='flex flex-col gap-8 mt-10 px-8'>
+      <div className='flex gap-4'>
+        {filter.map((item,index)=>{
+          return(
+            <CircularButton currentFilter={currentFilter} setCurrentFilter={setCurrentFilter} setCurrentToken={setCurrentToken} key={index} imgURL={item.imageURL} name={item.name} bgColor={item.bgColor} borderColor={item.borderColor} textColor={item.textColor}/>
+          )
+        })}
+      </div>     
       {responseVal.length > 0 ? (
         <ul className='flex gap-8 w-[60vw] flex-wrap'>
           {responseVal.map((item, index) => (
             <li>
-                <CoinCard src={item.imgURL} tokenName={item.tokenName} tokenSymbol={item.tokenSymbol} price={item.price} projectName={item.projectName} />    
+                <CoinCard src={item.imgURL} tokenName={item.tokenName} tokenSymbol={item.tokenSymbol} price={item.price} projectName={item.projectName} currentToken={currentToken}/>    
             </li>
           ))}
         </ul>
@@ -69,7 +120,7 @@ const HomePage = () => {
   );
 };
 
-function CoinCard({src,tokenName,tokenSymbol,price,projectName}:{src:string,tokenName:string,tokenSymbol:string,price:string,projectName:string}){
+function CoinCard({src,tokenName,tokenSymbol,price,projectName,currentToken}:{src:string,tokenName:string,tokenSymbol:string,price:string,projectName:string,currentToken:string}){
   return(
     <div className='shadow-xl rounded-xl border-gray-300 border-2 flex gap-2 flex-col p-4'>
       <Image src={src} alt={tokenName} height={100} width={100} />
@@ -79,7 +130,7 @@ function CoinCard({src,tokenName,tokenSymbol,price,projectName}:{src:string,toke
       </div>
       <div className='flex justify-end'>
         <div className='shadow-xl bg-gray-400 rounded p-1'>
-          {price}
+          {currentToken}-{price}
         </div>
       </div>
       <div className='flex gap-4'>
