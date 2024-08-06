@@ -8,6 +8,45 @@ import { Button, ButtonShimmer, CircularButton, Heading, SubHeading, Text } from
 const HomePage = () => {
   // const [responseVal, setResponseVal] = useState([]);
 
+  const apiKey= process.env.NEXT_PUBLIC_COINMARKETCAP_API_KEY;
+
+  async function getConversionRate(symbolFrom: string, symbolTo: string): Promise<number | null> {
+      const url: string = `https://pro-api.coinmarketcap.com/v1/tools/price-conversion?symbol=${symbolFrom}&convert=${symbolTo}&amount=1`;
+      const headers: HeadersInit = {
+          'Accepts': 'application/json',
+          'X-CMC_PRO_API_KEY': apiKey || ""
+      };
+
+      try {
+          const response: Response = await fetch(url, { headers: headers });
+          const data: any = await response.json();
+          if (response.ok) {
+              return data.data.quote[symbolTo].price;
+          } else {
+              console.error('Error:', data.status.error_message);
+              return null;
+          }
+      } catch (error) {
+          console.error('Fetch error:', error);
+          return null;
+      }
+  }
+
+  // Example usage:
+  async function exampleUsage() {
+      const symbolFrom: string = 'MATIC';
+      const symbolTo: string = 'ETH';
+      const rate: number | null = await getConversionRate(symbolFrom, symbolTo);
+      if (rate !== null) {
+          console.log(`1 ${symbolFrom} = ${rate.toFixed(6)} ${symbolTo}`);
+      } else {
+          console.log('Error fetching rate');
+      }
+  }
+
+  exampleUsage();
+
+
   const [currentFilter,setCurrentFilter] =useState("Polygon")
   const [currentChainToken,setCurrentChainToken] = useState("MATIC")
 
