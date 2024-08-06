@@ -9,7 +9,7 @@ const HomePage = () => {
   // const [responseVal, setResponseVal] = useState([]);
 
   const [currentFilter,setCurrentFilter] =useState("Polygon")
-  const [currentToken,setCurrentToken] = useState("MATIC")
+  const [currentChainToken,setCurrentChainToken] = useState("MATIC")
 
   const responseVal = [
     {
@@ -53,7 +53,7 @@ const HomePage = () => {
       bgColor:"orange-500",
       borderColor:"orange-600",
       textColor:"white",
-      token:"ARB"
+      chainToken:"ARB"
     },
     {
       imageURL:"/btc.png",
@@ -61,7 +61,7 @@ const HomePage = () => {
       bgColor:"orange-500",
       borderColor:"orange-600",
       textColor:"white",
-      token:"BTC"
+      chainToken:"BTC"
     },
     {
       imageURL:"/binance.png",
@@ -69,7 +69,7 @@ const HomePage = () => {
       bgColor:"orange-500",
       borderColor:"orange-600",
       textColor:"white",
-      token:"BNB"
+      chainToken:"BNB"
     },
     {
       imageURL:"/solana.png",
@@ -77,7 +77,7 @@ const HomePage = () => {
       bgColor:"orange-500",
       borderColor:"orange-600",
       textColor:"white",
-      token:"SOL"
+      chainToken:"SOL"
     },
     {
       imageURL:"/polygon.png",
@@ -85,7 +85,7 @@ const HomePage = () => {
       bgColor:"orange-500",
       borderColor:"orange-600",
       textColor:"white",
-      token:"MATIC"
+      chainToken:"MATIC"
     },
   ]
 
@@ -101,7 +101,7 @@ const HomePage = () => {
       <div className='flex gap-4'>
         {filter.map((item,index)=>{
           return(
-            <CircularButton currentFilter={currentFilter} setCurrentFilter={setCurrentFilter} setCurrentToken={setCurrentToken} key={index} imgURL={item.imageURL} name={item.name} bgColor={item.bgColor} borderColor={item.borderColor} textColor={item.textColor}/>
+            <CircularButton currentFilter={currentFilter} setCurrentFilter={setCurrentFilter} setCurrentChainToken={setCurrentChainToken} key={index} imgURL={item.imageURL} name={item.name} chainToken={item.chainToken} bgColor={item.bgColor} borderColor={item.borderColor} textColor={item.textColor}/>
           )
         })}
       </div>     
@@ -109,7 +109,7 @@ const HomePage = () => {
         <ul className='flex gap-8 w-[60vw] flex-wrap'>
           {responseVal.map((item, index) => (
             <li>
-                <CoinCard src={item.imgURL} tokenName={item.tokenName} tokenSymbol={item.tokenSymbol} price={item.price} projectName={item.projectName} currentToken={currentToken}/>    
+                <CoinCard src={item.imgURL} tokenName={item.tokenName} tokenSymbol={item.tokenSymbol} price={item.price} projectName={item.projectName} currentChainToken={currentChainToken}/>    
             </li>
           ))}
         </ul>
@@ -120,9 +120,9 @@ const HomePage = () => {
   );
 };
 
-function CoinCard({src,tokenName,tokenSymbol,price,projectName,currentToken}:{src:string,tokenName:string,tokenSymbol:string,price:string,projectName:string,currentToken:string}){
+function CoinCard({src,tokenName,tokenSymbol,price,projectName,currentChainToken}:{src:string,tokenName:string,tokenSymbol:string,price:string,projectName:string,currentChainToken:string}){
   return(
-    <div className='shadow-xl rounded-xl border-gray-300 border-2 flex gap-2 flex-col p-4'>
+    <div className='shadow-xl rounded-xl border-gray-300 border-2 flex-wrap flex gap-2 flex-col p-4'>
       <Image src={src} alt={tokenName} height={100} width={100} />
       <div className='flex flex-col gap-2 px-1 py-2'>
         <SubHeading text={`${tokenName} ${tokenSymbol}`} />
@@ -130,7 +130,7 @@ function CoinCard({src,tokenName,tokenSymbol,price,projectName,currentToken}:{sr
       </div>
       <div className='flex justify-end'>
         <div className='shadow-xl bg-gray-400 rounded p-1'>
-          {currentToken}-{price}
+          {currentChainToken}-{price}
         </div>
       </div>
       <div className='flex gap-4'>
