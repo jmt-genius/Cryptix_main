@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import NavBar from "../components/NavBar";
-import { Providers } from "./providers";
 import "../app/globals.css";
 import ClientLayout from './ClientLayout';
 
@@ -23,10 +22,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <ClientLayout>
-        <Providers>
           <NavBar />
           {children}
-        </Providers>
       </ClientLayout>
       </body>
     </html>

@@ -4,8 +4,6 @@ import Web3Modal from "web3modal";
 import ERC20Generator from "./ERC20Generator.json";
 import icoMarketplace from "./icoMarketplace.json";
 
-export {ERC20Generator,icoMarketplace} 
-
 export const ERC20Generator_ABI = ERC20Generator.abi;
 export const ERC20Generator_BYTECODE = ERC20Generator.bytecode;
 
