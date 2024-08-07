@@ -23,7 +23,7 @@ const NavBar = () => {
       };
 
   return (
-    <div className='flex justify-between shadow-lg px-8 w-[100vw]'>
+    <div className='flex justify-between shadow-lg px-8'>
         <div>
             <Image src="/logo_cryptix.png" alt='logo' width={150} height={150}/>
         </div>

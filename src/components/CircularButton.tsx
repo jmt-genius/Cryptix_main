@@ -6,7 +6,7 @@ const CircularButton = ({prevChainToken,setPrevChainToken,currentFilter,setCurre
     <div onClick={()=>{
         setCurrentFilter(name)
         setCurrentChainToken(chainToken)
-        }} className={`flex cursor-pointer items-center text-black justify-around border-2 text-${textColor} border-${borderColor} bg-${bgColor} ${currentFilter==name && 'bg-gray-300'} px-2 py-1 gap-2  rounded-full`}>
+        }} className={`flex cursor-pointer items-center text-black justify-around border-2 ${bgColor} ${currentFilter==name ? 'border-4 border-black' : borderColor } px-2 py-1 gap-2  rounded-full`}>
         <Image src={imgURL} alt={name} height={30} width={30} />
         <p>{name}</p>        
     </div>
