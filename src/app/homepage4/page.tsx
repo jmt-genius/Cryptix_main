@@ -1,63 +1,51 @@
 'use client'
 
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
-import { Card, CardContent } from "@/components/ui/card"
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel"
-
-import { Button, ButtonShimmer, CircularButton, Heading, SubHeading, Text } from '@/components';
+import React, { useState } from 'react';
+import { H1, H3, H4, Para } from '@/components';
 
 const HomePage4 = () => {
-  const [loader, setLoader] = useState(false);
-  const [currentFilter, setCurrentFilter] = useState("Polygon");
-  const [prevChainToken, setPrevChainToken] = useState("MATIC");
-  type ChainToken = 'ARB' | 'BTC' | 'BNB' | 'SOL' | 'MATIC';
-  const [currentChainToken, setCurrentChainToken] = useState<ChainToken>('MATIC');
-    const [multiplier, setMultiplier] = useState({
-    "ARB": 0.78,
-    "BTC": 0.0000071,
-    "BNB": 0.0008329,
-    "SOL": 0.0031,
-    "MATIC": 1
-  });
-  const responseVal =[
-    { imgURL: "/logoipsum-300.svg", tokenName: "Token - 1", tokenSymbol: "Tk1", price: 100, projectName: "Project-1", id: "proj-1" },
-    { imgURL: "/logoipsum-300.svg", tokenName: "Token - 2", tokenSymbol: "Tk2", price: 200, projectName: "Project-2", id: "proj-2" },
-    { imgURL: "/logoipsum-300.svg", tokenName: "Token - 1", tokenSymbol: "Tk1", price: 100, projectName: "Project-1", id: "proj-3" },
-    { imgURL: "/logoipsum-300.svg", tokenName: "Token - 2", tokenSymbol: "Tk2", price: 200, projectName: "Project-2", id: "proj-4" }
-  ]
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const filter = [
-    { imageURL: "/arbitrum.png", name: "Arbitrum", bgColor: "orange-500", borderColor: "orange-600", textColor: "white", chainToken: "ARB" },
-    { imageURL: "/btc.png", name: "Bitcoin", bgColor: "orange-500", borderColor: "orange-600", textColor: "white", chainToken: "BTC" },
-    { imageURL: "/binance.png", name: "Binance", bgColor: "orange-500", borderColor: "orange-600", textColor: "white", chainToken: "BNB" },
-    { imageURL: "/solana.png", name: "Solana", bgColor: "orange-500", borderColor: "orange-600", textColor: "white", chainToken: "SOL" },
-    { imageURL: "/polygon.png", name: "Polygon", bgColor: "orange-500", borderColor: "orange-600", textColor: "white", chainToken: "MATIC" },
+    { imageURL: "/cryptoCurrencies/arbitrum.png", name: "Arbitrum", bgColor: "orange-500", borderColor: "orange-600", textColor: "white", chainToken: "ARB" },
+    { imageURL: "/cryptoCurrencies/btc.png", name: "Bitcoin", bgColor: "orange-500", borderColor: "orange-600", textColor: "white", chainToken: "BTC" },
+    { imageURL: "/cryptoCurrencies/binance.png", name: "Binance", bgColor: "orange-500", borderColor: "orange-600", textColor: "white", chainToken: "BNB" },
+    { imageURL: "/cryptoCurrencies/solana.png", name: "Solana", bgColor: "orange-500", borderColor: "orange-600", textColor: "white", chainToken: "SOL" },
+    { imageURL: "/cryptoCurrencies/polygon.png", name: "Polygon", bgColor: "orange-500", borderColor: "orange-600", textColor: "white", chainToken: "MATIC" },
   ];
 
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % filter.length);
+  };
+
+  const handlePrevious = () => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + filter.length) % filter.length);
+  };
+
   return (
-    <div className='flex flex-col gap-8 mt-10 px-8'>
-      <div className='flex justify-center w-full'>
-        <Carousel infiniteLoop>
-          <CarouselContent>
-            {responseVal.map((item, index) => (
-              <CarouselItem key={index}>
-                <div className='w-[9vw] h-[60vh] relative'>
-                  <Image src={item.imgURL} alt={item.tokenName} fill objectFit="cover" />
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
-        </Carousel>
+    <div className='flex flex-col gap-8 mt-10 px-8 items-center'>
+      <H1 text="Project Description" />
+      <H3 text="Here is a detailed description of the project. It includes various aspects and functionalities that are covered in this project." />
+      <div className='flex justify-center w-full relative'>
+        <div className='flex items-center justify-center relative'>
+          <button onClick={handlePrevious} className='absolute left-4'>
+            <svg width="24" height="24" fill="currentColor" className="text-gray-500 hover:text-gray-700">
+              <path fillRule="evenodd" d="M15.707 19.707a1 1 0 01-1.414 0L7.293 12l7.293-7.707a1 1 0 011.414 1.414L10.414 12l5.293 5.293a1 1 0 010 1.414z" clipRule="evenodd" />
+            </svg>
+          </button>
+          <div className='h-[40vh] w-[40vw] relative mx-auto'>
+            <Image src={filter[currentIndex].imageURL} alt={filter[currentIndex].name} layout="fill" objectFit="contain" />
+          </div>
+          <button onClick={handleNext} className='absolute right-4'>
+            <svg width="24" height="24" fill="currentColor" className="text-gray-500 hover:text-gray-700">
+              <path fillRule="evenodd" d="M8.293 4.293a1 1 0 011.414 0L17.707 12l-7.293 7.707a1 1 0 01-1.414-1.414L13.586 12 8.293 6.707a1 1 0 010-1.414z" clipRule="evenodd" />
+            </svg>
+          </button>
+        </div>
       </div>
+      <H4 text={filter[currentIndex].name} />
+      <Para text="This project aims to revolutionize the way we think about blockchain and cryptocurrency. The detailed description above covers various functionalities and aspects of the project, making it a comprehensive solution in the crypto world." />
     </div>
   );
 };
