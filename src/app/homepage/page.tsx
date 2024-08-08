@@ -28,11 +28,11 @@ const HomePage = () => {
   ]
 
   const filter = [
-    { imageURL: "/arbitrum.png", name: "Arbitrum", bgColor: "bg-blue-300", borderColor: "border-blue-500", textColor: "white", chainToken: "ARB" },
-    { imageURL: "/btc.png", name: "Bitcoin", bgColor: "bg-orange-300", borderColor: "border-orange-500", textColor: "white", chainToken: "BTC" },
-    { imageURL: "/binance.png", name: "Binance", bgColor: "bg-yellow-200", borderColor: "border-yellow-500", textColor: "white", chainToken: "BNB" },
-    { imageURL: "/solana.png", name: "Solana", bgColor: "bg-teal-200", borderColor: "border-teal-600", textColor: "white", chainToken: "SOL" },
-    { imageURL: "/polygon.png", name: "Polygon", bgColor: "bg-purple-300", borderColor: "border-purple-600", textColor: "white", chainToken: "MATIC" },
+    { imageURL: "/cryptoCurrencies/arbitrum.png", name: "Arbitrum", bgColor: "bg-blue-300", borderColor: "border-blue-500", textColor: "white", chainToken: "ARB" },
+    { imageURL: "/cryptoCurrencies/btc.png", name: "Bitcoin", bgColor: "bg-orange-300", borderColor: "border-orange-500", textColor: "white", chainToken: "BTC" },
+    { imageURL: "/cryptoCurrencies/binance.png", name: "Binance", bgColor: "bg-yellow-200", borderColor: "border-yellow-500", textColor: "white", chainToken: "BNB" },
+    { imageURL: "/cryptoCurrencies/solana.png", name: "Solana", bgColor: "bg-teal-200", borderColor: "border-teal-600", textColor: "white", chainToken: "SOL" },
+    { imageURL: "/cryptoCurrencies/polygon.png", name: "Polygon", bgColor: "bg-purple-300", borderColor: "border-purple-600", textColor: "white", chainToken: "MATIC" },
   ];
 
   const walletData = [
@@ -48,8 +48,8 @@ const HomePage = () => {
   ];
 
   return (
-    <div className='flex gap-8 mt-10 px-8'>
-      <div className='flex flex-col gap-8 w-[50vw]'>
+    <div className='flex gap-16 mt-10 px-8'>
+      <div className='flex flex-col gap-8 w-[55vw]'>
         <div className='flex gap-4 '>
           {filter.map((item, index) => (
             <CircularButton
@@ -70,7 +70,7 @@ const HomePage = () => {
           ))}
         </div>
         {responseVal.length > 0 ? (
-          <ul className='flex gap-8  flex-wrap'>
+          <ul className='flex gap-8 justify-between  flex-wrap'>
             {responseVal.map((item, index) => (
               <li key={index}>
                 <CoinCard
