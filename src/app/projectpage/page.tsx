@@ -23,7 +23,6 @@ const page = () => {
                 <CarouselDemo />
             </div>
             <div className='flex flex-col gap-4'>
-                <H1 otherClasses='text-white' text='Project Name' />
                 <H2 otherClasses='text-white' text='Project Description' />
                 <Para  otherClasses='text-white' text=" Project Description goes here  Project Description goes here  Project Description goes here  Project Description goes here  Project Description goes here "/>
             </div>

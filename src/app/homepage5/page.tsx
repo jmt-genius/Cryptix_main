@@ -62,7 +62,7 @@ const HomePage = () => {
         "BTC": data.BTC.MATIC,
         "BNB": data.BNB.MATIC,
         "SOL": data.SOL.MATIC,
-        "MATIC": data.MATIC.MATIC
+        "MATIC": data.MATIC.MATIC 
       };
       setMultiplier(newMultiplier);
     } catch (error) {
@@ -78,6 +78,10 @@ const HomePage = () => {
 
     return () => clearInterval(interval);
   }, []);
+
+  useEffect(()=>{
+    console.log('multipler',multiplier)
+  },[multiplier])
 
   return (
     <div className='flex gap-16 mt-10 px-8'>

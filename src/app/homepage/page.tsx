@@ -1,5 +1,6 @@
 'use client'
 
+import axios from 'axios';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import { BlackButton, Button, ButtonShimmer, CircularButton, H1, H2, H3, Heading, Para, SubHeading, Text } from '@/components';
@@ -46,6 +47,40 @@ const HomePage = () => {
     { tokenName: "TkJ", price: 3000, units: 22500 },
     { tokenName: "TkT", price: 400, units: 10500 }
   ];
+
+  const fetchConversionRates = async () => {
+    try {
+      const response = await axios.get('https://min-api.cryptocompare.com/data/pricemulti?fsyms=MATIC,BTC,BNB,SOL,ARB&tsyms=MATIC', {
+        headers: {
+          'authorization': 'Apikey 17a98f517459d8fb8fb4694b16383ef3f886b73ce2b8b6debd34fb0c05587c59'
+        }
+      });
+      const data = response.data;
+      const newMultiplier = {
+        "ARB": 1/data.ARB.MATIC,
+        "BTC": 1/data.BTC.MATIC,
+        "BNB": 1/data.BNB.MATIC,
+        "SOL": 1/data.SOL.MATIC,
+        "MATIC": 1/data.MATIC.MATIC 
+      };
+      setMultiplier(newMultiplier);
+    } catch (error) {
+      console.error('Error fetching conversion rates:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchConversionRates();
+    const interval = setInterval(() => {
+      fetchConversionRates();
+    }, 60000); // Update every 60 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(()=>{
+    console.log('multipler',multiplier)
+  },[multiplier])
 
   return (
     <div className='flex  gap-16 py-8 px-8'>
@@ -104,7 +139,7 @@ const HomePage = () => {
 
 function CoinCard({ src, tokenName, tokenSymbol, price, projectName, currentChainToken }: { src: string, tokenName: string, tokenSymbol: string, price: number, projectName: string, currentChainToken: string }) {
   return (
-    <div className='shadow-xl bg-white rounded-xl border-gray-300 border-2 flex gap-2 flex-col p-4'>
+    <div className='shadow-xl bg-black-100 text-white rounded-xl border-gray-300 border-2 flex gap-2 flex-col p-4'>
       <Image src={src} alt={tokenName} height={100} width={100} />
       <div className='flex flex-col gap-2 px-1 py-2'>
         <SubHeading text={`${tokenName} ${tokenSymbol}`} />
