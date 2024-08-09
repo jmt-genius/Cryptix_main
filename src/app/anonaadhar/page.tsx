@@ -9,6 +9,9 @@ import { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import Image from "next/image";
 import logo from "../../../public/assets/logo.svg"; // Adjust the path if necessary
+import { VortexWrapper } from "@/newComponents";
+import { useRouter } from "next/navigation";
+import { H1, H2 } from "@/components";
 
 type HomeProps = {
   setUseTestAadhaar: (state: boolean) => true;
@@ -22,15 +25,25 @@ declare global {
 }
 
 export default function Home({ setUseTestAadhaar, useTestAadhaar }: HomeProps) {
+const router =useRouter()
+
   const [anonAadhaar] = useAnonAadhaar();
   const [, latestProof] = useProver();
   const [walletAddress, setWalletAddress] = useState<string | null>(null);
 
+  useEffect(()=>{
+    console.log(walletAddress)
+    localStorage.setItem('walletAddress', walletAddress || '')
+  },[walletAddress])
+
   useEffect(() => {
     if (anonAadhaar.status === "logged-in") {
       console.log(anonAadhaar.status);
+      if(walletAddress){
+        router.push('/homepage')
+      }
     }
-  }, [anonAadhaar]);
+  }, [anonAadhaar,walletAddress]);
 
   const switchAadhaar = () => {
     setUseTestAadhaar(!useTestAadhaar);
@@ -53,35 +66,47 @@ export default function Home({ setUseTestAadhaar, useTestAadhaar }: HomeProps) {
 
   return (
     <div>
-      <section id="home" className="relative z-10 pb-28 pt-48">
-        <main className="mb-8 flex flex-col items-center gap-8 bg-white rounded-2xl max-w-screen-sm mx-auto h-[30rem] md:h-[25rem] p-8">
-          <Image src={logo} alt="Cryptix logo" width={150} height={150} />
-          <p>Prove your Identity anonymously using your Aadhaar card.</p>
-
-          <LogInWithAnonAadhaar nullifierSeed={1234} />
-        </main>
-        {anonAadhaar.status === "logged-in" && (
-          <div className="flex flex-col items-center gap-4 rounded-2xl max-w-screen-sm mx-auto p-8 shadow-lg bg-white mb-8">
-            <>
-              <p>✅ Proof is valid</p>
-              <p>Got your Aadhaar Identity Proof</p>
-              <>Welcome anon!</>
-              {latestProof && (
-                <AnonAadhaarProof
-                  code={JSON.stringify(
-                    typeof latestProof === "string"
-                      ? JSON.parse(latestProof)
-                      : latestProof,
-                    null,
-                    2
-                  )}
-                />
-              )}
-            </>
-          </div>
-        )}
+      <VortexWrapper>
+        <section id="home" className="h-screen w-screen flex z-10 p-16 justify-center items-center">
+        <div className="flex flex-col gap-8">
+          <main className=" flex flex-col items-center gap-8 bg-white rounded-2xl max-w-screen-sm mx-auto  p-8">
+            <Image src={logo} alt="Cryptix logo" width={150} height={150} />
+            {anonAadhaar.status != "logged-in" &&
+            <H2 otherClasses="text-center" text="Prove your Identity anonymously using your Aadhaar card." />
+            }
+            {anonAadhaar.status == "logged-in" &&
+            <H2 otherClasses="text-center" text="Prove your Identity anonymously using your Aadhaar card." />
+            }
+            <LogInWithAnonAadhaar nullifierSeed={1234} />
+          </main>
+          {anonAadhaar.status === "logged-in" && (
+            <div className="flex flex-col items-center gap-4 rounded-2xl max-w-screen-sm mx-auto p-8 shadow-lg bg-white mb-8">
+              <>
+              <H1 text="✅ Proof is valid" />
+              <H2 text="Continue with step two 😁" />
+                {/* {latestProof && (
+                  <AnonAadhaarProof
+                    code={JSON.stringify(
+                      typeof latestProof === "string"
+                        ? JSON.parse(latestProof)
+                        : latestProof,
+                      null,
+                      2
+                    )}
+                  />
+                )} */}
+              </>
+            </div>
+          )}
+        </div>
         {anonAadhaar.status === "logged-in" && (
           <div className="flex flex-col items-center gap-8 rounded-2xl max-w-screen-sm mx-auto p-8 shadow-lg bg-white">
+            <div className="flex flex-col items-center gap-4 rounded-2xl max-w-screen-sm mx-auto p-8 shadow-lg bg-white mb-8">
+              <>
+              <H1 otherClasses="text-center" text="Sign Up with metamask!" />
+              <H2 text="Connect Your Metamask 👉" />
+              </>
+            </div>
             <button
               onClick={connectMetaMask}
               type="button"
@@ -96,14 +121,10 @@ export default function Home({ setUseTestAadhaar, useTestAadhaar }: HomeProps) {
             )}
           </div>
         )}
-        <div
-          className="absolute left-0 top-0 -z-10 h-full w-full opacity-20"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgb(62, 125, 255) 0%, rgba(62, 125, 255, 0) 100%)",
-          }}
-        ></div>
+        
       </section>
+      </VortexWrapper>
+      
     </div>
   );
 }

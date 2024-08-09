@@ -16,4 +16,4 @@ import { LightText } from "./LightText";
 import BlackButton from "./BlackButton";
 import CustomImage from "./CustomImage";
 
-export {NavBar, Input, ButtonShimmer, Heading, SubHeading, Text, Button, CircularButton, H1, H2, H3, H4, Para, BlockQuote, LightText, BlackButton, CustomImage}
+export {NavBar, Input, ButtonShimmer, Heading, SubHeading, Text, Button, CircularButton, H1, H2, H3, H4, Para, BlockQuote, LightText, BlackButton, CustomImage,}

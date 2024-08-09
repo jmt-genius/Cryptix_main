@@ -32,7 +32,7 @@ const HomePage = () => {
     { imageURL: "/cryptoCurrencies/btc.png", name: "Bitcoin", bgColor: "bg-orange-300", borderColor: "border-orange-500", textColor: "white", chainToken: "BTC" },
     { imageURL: "/cryptoCurrencies/binance.png", name: "Binance", bgColor: "bg-yellow-200", borderColor: "border-yellow-500", textColor: "white", chainToken: "BNB" },
     { imageURL: "/cryptoCurrencies/solana.png", name: "Solana", bgColor: "bg-teal-200", borderColor: "border-teal-600", textColor: "white", chainToken: "SOL" },
-    { imageURL: "/cryptoCurrencies/polygon.png", name: "Polygon", bgColor: "bg-purple-300", borderColor: "border-purple-600", textColor: "white", chainToken: "MATIC" },
+    { imageURL: "/cryptoCurrencies/polygon.png", name: "Polygon", bgColor: "bg-purple", borderColor: "border-red-200", textColor: "white", chainToken: "MATIC" },
   ];
 
   const walletData = [
@@ -48,8 +48,8 @@ const HomePage = () => {
   ];
 
   return (
-    <div className='flex gap-16 mt-10 px-8'>
-      <div className='flex flex-col gap-8 w-[55vw]'>
+    <div className='flex  gap-16 py-8 px-8'>
+      <div className='flex flex-col gap-8 '>
         <div className='flex gap-4 '>
           {filter.map((item, index) => (
             <CircularButton
@@ -70,7 +70,7 @@ const HomePage = () => {
           ))}
         </div>
         {responseVal.length > 0 ? (
-          <ul className='flex gap-8 justify-between  flex-wrap'>
+          <ul className='flex gap-8 flex-wrap'>
             {responseVal.map((item, index) => (
               <li key={index}>
                 <CoinCard
@@ -88,13 +88,13 @@ const HomePage = () => {
           <p>Loading...</p>
         )}
       </div>
-      <div className='flex flex-col gap-12'>
+      <div className=' flex flex-col gap-12'>
           <div className=' flex flex-col gap-4 '>
-            <H2 text="Your Wallet"/>
+            <H2 otherClasses='text-white'  text="Your Wallet"/>
             <WalletCard walletData={walletData} />
           </div>
           <div className=' flex flex-col gap-4 '>
-            <H2 text="Your Tokens"/>
+            <H2 otherClasses='text-white' text="Your Tokens"/>
             <TokenCard walletData={YourTokenData} />
           </div>
       </div> 
@@ -104,7 +104,7 @@ const HomePage = () => {
 
 function CoinCard({ src, tokenName, tokenSymbol, price, projectName, currentChainToken }: { src: string, tokenName: string, tokenSymbol: string, price: number, projectName: string, currentChainToken: string }) {
   return (
-    <div className='shadow-xl rounded-xl border-gray-300 border-2 flex gap-2 flex-col p-4'>
+    <div className='shadow-xl bg-white rounded-xl border-gray-300 border-2 flex gap-2 flex-col p-4'>
       <Image src={src} alt={tokenName} height={100} width={100} />
       <div className='flex flex-col gap-2 px-1 py-2'>
         <SubHeading text={`${tokenName} ${tokenSymbol}`} />
@@ -125,11 +125,11 @@ function CoinCard({ src, tokenName, tokenSymbol, price, projectName, currentChai
 
 function WalletCard({ walletData }: { walletData: { tokenName: string, price: number, units: number }[] }) {
   return (
-    <div className='shadow-xl rounded-xl border-gray-400 border-2 flex-wrap flex gap-2 flex-col p-4'>
+    <div className='shadow-xl bg-white rounded-xl border-gray-400 border-2 flex-wrap flex gap-2 flex-col p-4'>
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead><H3 text="Token Name"/></TableHead>
+            <TableHead><H3  text="Token Name"/></TableHead>
             <TableHead><H3 text="Price(MATIC)"/></TableHead>
             <TableHead><H3 text="Units"/></TableHead>
           </TableRow>
@@ -153,7 +153,7 @@ function WalletCard({ walletData }: { walletData: { tokenName: string, price: nu
 function TokenCard({ walletData }: { walletData: { tokenName: string, price: number, units: number }[] }) {
   return (
     <div className='flex gap-4 flex-col  '>
-      <div className='shadow-xl rounded-xl border-gray-400 border-2 flex-wrap flex gap-2 flex-col p-4'>
+      <div className='bg-white shadow-xl rounded-xl border-gray-400 border-2 flex-wrap flex gap-2 flex-col p-4'>
         <Table>
           <TableHeader>
             <TableRow>
